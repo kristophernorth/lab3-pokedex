@@ -7,7 +7,9 @@ import { setHTML } from "../utils/Writer.js";
 
 export class WildPokemonsController {
   constructor() {
+    AppState.on('wildPokemons', this.drawWildPokemons)
 
+    this.getWildPokemons()
   }
 
   async getWildPokemons() {
@@ -27,5 +29,12 @@ export class WildPokemonsController {
     setHTML('wild-pokemons-list', htmlContent)
   }
 
+  drawActivePokemon() {
+    const activePokemon = AppState.activePokemon
+
+    if (!activePokemon) return
+
+    setHTML('pokemon-details', activePokemon.detailsHTMLTemplate)
+  }
 
 }
